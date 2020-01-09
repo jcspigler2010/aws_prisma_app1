@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "nodejs-mongodb-example",
+    "name": "rehl7-w-prisma",
     "annotations": {
       "openshift.io/display-name": "REHL7 + Twistlock (Ephemeral)",
       "description": "An example REHL7 OSE Image. Only use this template for testing.",
@@ -17,8 +17,8 @@
   },
   "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/nodejs-ex/blob/master/README.md.",
   "labels": {
-      "template": "nodejs-mongodb-example",
-      "app": "nodejs-mongodb-example"
+      "template": "rehl7-w-prisma",
+      "app": "rehl7-w-prisma"
   },
   "objects": [
     {
@@ -166,7 +166,7 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "nodejs-mongodb-example"
+                "rehl7-w-prisma"
               ],
               "from": {
                 "kind": "ImageStreamTag",
@@ -192,7 +192,7 @@
           "spec": {
             "containers": [
               {
-                "name": "nodejs-mongodb-example",
+                "name": "rehl7-w-prisma",
                 "image": " ",
                 "ports": [
                   {
@@ -423,7 +423,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the frontend objects defined in this template.",
       "required": true,
-      "value": "nodejs-mongodb-example"
+      "value": "rehl7-w-prisma"
     },
     {
       "name": "NAMESPACE",

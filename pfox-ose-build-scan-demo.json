@@ -1,0 +1,73 @@
+{
+    "apiVersion": "build.openshift.io/v1",
+    "kind": "BuildConfig",
+    "metadata": {
+        "annotations": {
+            "openshift.io/generated-by": "OpenShiftNewBuild"
+        },
+        "creationTimestamp": "2020-01-02T22:36:17Z",
+        "labels": {
+            "build": "pfox-ose-build-scan-demo"
+        },
+        "name": "pfox-ose-build-scan-demo",
+        "namespace": "ci",
+        "resourceVersion": "1994310",
+        "selfLink": "/apis/build.openshift.io/v1/namespaces/ci/buildconfigs/pfox-ose-build-scan-demo",
+        "uid": "4ac2ae02-2db0-11ea-addf-0630220beaf8"
+    },
+    "spec": {
+        "failedBuildsHistoryLimit": 5,
+        "nodeSelector": null,
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "pfox-ose-build-scan-demo:latest"
+            }
+        },
+        "postCommit": {
+            "script": "curl -k -ssl -u \"bob_the_builder:twistlock2019\" https://172.30.15.89:8083/api/v1/util/twistcli -o twistcli \u0026\u0026 chmod +x ./twistcli \u0026\u0026 ./twistcli images scan --containerized --user bob_the_builder --password twistlock2019 --address https://twistlock-console.twistlock.svc:8083 --vulnerability-threshold high --details $OPENSHIFT_BUILD_NAME"
+        },
+        "resources": {},
+        "runPolicy": "Serial",
+        "source": {
+            "dockerfile": "FROM registry.redhat.io/rhel7",
+            "type": "Dockerfile"
+        },
+        "strategy": {
+            "dockerStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "rhel7:latest"
+                }
+            },
+            "type": "Docker"
+        },
+        "successfulBuildsHistoryLimit": 5,
+        "triggers": [
+            {
+                "github": {
+                    "secret": "SPUsuIfn_BHW-l7eq2Ji"
+                },
+                "type": "GitHub"
+            },
+            {
+                "generic": {
+                    "secret": "-ckjEJnGutP8Wp1gaNbT"
+                },
+                "type": "Generic"
+            },
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "imageChange": {
+                    "lastTriggeredImageID": "registry.redhat.io/rhel7@sha256:d8e52fab67bc27384fe5f4022e8c5e5d83a7901b83df7ed41d4a216aea57b44c"
+                },
+                "type": "ImageChange"
+            }
+        ]
+    },
+    "status": {
+        "lastVersion": 5
+    }
+}
